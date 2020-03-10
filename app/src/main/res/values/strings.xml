@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">CandidateScenario</string>
+    <string name="random">Generate Random Numbers</string>
+    <string name="value1">Value 1</string>
+    <string name="valueName">Value Names </string>
+    <string name="value">Values (°C)</string>
+    <string name="value2">Value 2</string>
+    <string name="value3">Value 3</string>
+    <string name="value4">Value 4</string>
+    <string name="value5">Value 5</string>
+    <string name="random_value1">21</string>
+    <string name="random_value2">23</string>
+    <string name="random_value3">26</string>
+    <string name="random_value4">28</string>
+    <string name="random_value5">29</string>
+    <string name="hint">X°C</string>
+    <string name="randomImg">Random Image</string>
+    <string name="textClock">Time:</string>
+    <string name="view1">value is below 15 or above 35 during the process</string>
+<!--    <string name="view2">value 2 below 15 or above 35 during the process</string>-->
+<!--    <string name="view3">value 3 below 15 or above 35 during the process</string>-->
+<!--    <string name="view4">value 4 below 15 or above 35 during the process</string>-->
+<!--    <string name="view5">value 5 below 15 or above 35 during the process</string>-->
+</resources>
