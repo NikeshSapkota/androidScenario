@@ -16,9 +16,12 @@
     <string name="hint">X°C</string>
     <string name="randomImg">Random Image</string>
     <string name="textClock">Time:</string>
-    <string name="view1">value is below 15 or above 35 during the process</string>
-<!--    <string name="view2">value 2 below 15 or above 35 during the process</string>-->
-<!--    <string name="view3">value 3 below 15 or above 35 during the process</string>-->
-<!--    <string name="view4">value 4 below 15 or above 35 during the process</string>-->
-<!--    <string name="view5">value 5 below 15 or above 35 during the process</string>-->
+    <string name="view1">value 1 below 15 or above 35 during the process</string>
+    <string name="view2">value 2 below 15 or above 35 during the process</string>
+    <string name="view3">value 3 below 15 or above 35 during the process</string>
+    <string name="view4">value 4 below 15 or above 35 during the process</string>
+    <string name="view5">value 5 below 15 or above 35 during the process</string>
+    <string name="alert">Alert</string>
+    <string name="OK">Ok</string>
+    <string name="never">Never Show Again</string>
 </resources>

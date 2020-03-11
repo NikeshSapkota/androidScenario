@@ -1,21 +1,17 @@
 package com.example.candidatesenario;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
 
@@ -23,17 +19,19 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     private EditText txt1, txt2, txt3, txt4, txt5;
-    private PopupWindow popupWindow;
 
     private int seconds = 120;
     private boolean stopTimer = false;
 
+    int status;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Button btnRandom = findViewById(R.id.btn_random);
+
 
         timer(); // here code for the timer is set
 
@@ -43,13 +41,6 @@ public class MainActivity extends AppCompatActivity {
         txt4 = findViewById(R.id.edt_4);
         txt5 = findViewById(R.id.edt_5);
 
-//        popup_text1 = findViewById(R.id.popup_textView1);
-//        TextView popup_text2 = findViewById(R.id.popup_textView2);
-//       TextView  popup_text3 = findViewById(R.id.popup_textView3);
-//       TextView  popup_text4 = findViewById(R.id.popup_textView4);
-//       TextView  popup_text5 = findViewById(R.id.popup_textView5);
-
-
         btnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,9 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }); // ---------end of btnRandomOnCLickListener
 
-
 //        ------------------------------------------------------------------------------------------------------------
-
 
     }
 
@@ -76,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
         // converting string array into a array of integer
         int[] intDiffValues = new int[diffValues.length];
-
 
         for (int i = 0; i < intDiffValues.length; i++) {
             intDiffValues[i] = Integer.parseInt(diffValues[i]);
@@ -104,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 txt5.setText(Integer.toString(modifiedValues));
                 System.out.println(modifiedValues + "the case 4 ");
             }
-
             checking();
         }
 
@@ -129,95 +116,217 @@ public class MainActivity extends AppCompatActivity {
 
             int valueNew = intDiffValuescheck[i];
             if ((valueNew < 15) || (valueNew > 35)) {
-                showPopup();
+//                showPopup();
 
-                // some null object references
-//                int a = i;
-//                if (a == 0 && popup_text1.getVisibility() == View.GONE) {
-////                    popup_text1.setVisibility(View.VISIBLE);
-//                    Log.d("desc", "checking: ok not visible");
-//                }
-//                else if (a == 1) {
-//                    popup_text2.setVisibility(View.VISIBLE);
-//                } else if (a == 2) {
-//                    popup_text3.setVisibility(View.VISIBLE);
-//                } else if (a == 3) {
-//                    popup_text4.setVisibility(View.VISIBLE);
-//                }
-//                 else if (a == 4 && popup_text1.getVisibility() == View.GONE) {
-//                    popup_text5.setVisibility(View.VISIBLE);
-//                }
-//                else {
-//                    Log.d("Error", "checking: error in visibility ");
-//                }
+                if (i == 4) {
+
+                    SharedPreferences preferences5 = getSharedPreferences("PREFS5", 0);
+                    boolean isShowCustomDialog5 = preferences5.getBoolean("showCustomDialog5", true);
+                    if (isShowCustomDialog5) {
+                        showCustomDialog5();
+                    }
+                }
+                if (i == 1) {
+                    SharedPreferences preferences2 = getSharedPreferences("PREFS2", 0);
+                    boolean isShowCustomDialog2 = preferences2.getBoolean("showCustomDialog2", true);
+                    if (isShowCustomDialog2) {
+                        showCustomDialog2();
+                    }
+                }
+                if (i == 0) {
+                    SharedPreferences preferences = getSharedPreferences("PREFS", 0);
+                    boolean isShowCustomDialog = preferences.getBoolean("showCustomDialog", true);
+                    if (isShowCustomDialog) {
+                        showCustomDialog();
+                    }
+                }
+                if (i == 2) {
+                    SharedPreferences preferences3 = getSharedPreferences("PREFS3", 0);
+                    boolean isShowCustomDialog3 = preferences3.getBoolean("showCustomDialog3", true);
+                    if (isShowCustomDialog3) {
+                        showCustomDialog3();
+                    }
+                }
+                if (i == 3) {
+
+                    SharedPreferences preferences4 = getSharedPreferences("PREFS4", 0);
+                    boolean isShowCustomDialog4 = preferences4.getBoolean("showCustomDialog4", true);
+                    if (isShowCustomDialog4) {
+                        showCustomDialog4();
+                    }
+
+                }
 
             }
         }
     }
 
 
-//    public void open(View view){
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-//        alertDialogBuilder.setMessage("Are you sure, You wanted to make decision");
-//                alertDialogBuilder.setPositiveButton("yes",
-//                        new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface arg0, int arg1) {
-//                                Toast.makeText(MainActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
-//                            }
-//                        });
-//
-//        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                finish();
-//            }
-//        });
-//
-//        AlertDialog alertDialog = alertDialogBuilder.create();
-//        alertDialog.show();
-//    }
 
+    private void showCustomDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        View layoutView = getLayoutInflater().inflate(R.layout.custom_popup, null);
+        Button dialogButton = layoutView.findViewById(R.id.buttonOk);
+        Button dialogButton2 = layoutView.findViewById(R.id.buttonNever);
+        dialogBuilder.setView(layoutView);
 
-    private void showPopup() {
+        TextView alertT = findViewById(R.id.alertText);
+//        alertT.setText("value 2 below 15 or above 35 during the process");
 
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
 
-        // start coding for popup
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayoutMain);
-
-        LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.custom_popup, null);
-
-        // use to check the height and width of the screen and   calculation is based on it
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-
-//        getWindow().setLayout((int) (width * .6) ,(int) (height * .6));
-
-
-        // for the size
-        popupWindow = new PopupWindow(container, (int) (width * .6), (int) (height * .2), true);
-        // for placement
-        popupWindow.showAtLocation(linearLayout, Gravity.NO_GRAVITY, (int) (width * .4), (int) (height * .2));
-
-        container.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
+        dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                popupWindow.dismiss();
-
-                return true;
+            public void onClick(View view) {
+                alertDialog.dismiss();
             }
-        }); // dismissing the container
+        });
 
+        dialogButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences preferences = getSharedPreferences("PREFS", 0);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("showCustomDialog", false);
+                editor.apply();
+                alertDialog.dismiss();
+            }
+        });
+    }
 
-    } // ending coding for popup
+    private void showCustomDialog2() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        View layoutView = getLayoutInflater().inflate(R.layout.second_dialog, null);
+        Button dialogButton = layoutView.findViewById(R.id.buttonOk2);
+        Button dialogButton2 = layoutView.findViewById(R.id.buttonNever2);
+        dialogBuilder.setView(layoutView);
+
+        TextView alertT = findViewById(R.id.alertText2);
+//        alertT.setText("value 2 below 15 or above 35 during the process");
+
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        dialogButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences preferences2 = getSharedPreferences("PREFS2", 0);
+                SharedPreferences.Editor editor = preferences2.edit();
+                editor.putBoolean("showCustomDialog2", false);
+                editor.apply();
+                alertDialog.dismiss();
+            }
+        });
+    }
+
+    private void showCustomDialog3() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        @SuppressLint("InflateParams") View layoutView = getLayoutInflater().inflate(R.layout.my_dialog3, null);
+        Button dialogButton = layoutView.findViewById(R.id.buttonOk3);
+        Button dialogButton2 = layoutView.findViewById(R.id.buttonNever3);
+        dialogBuilder.setView(layoutView);
+
+        TextView alertT = findViewById(R.id.alertText3);
+//        alertT.setText("value 2 below 15 or above 35 during the process");
+
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        dialogButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences preferences3 = getSharedPreferences("PREFS3", 0);
+                SharedPreferences.Editor editor = preferences3.edit();
+                editor.putBoolean("showCustomDialog3", false);
+                editor.apply();
+                alertDialog.dismiss();
+            }
+        });
+    }
+
+    private void showCustomDialog4() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        View layoutView = getLayoutInflater().inflate(R.layout.my_dialog4, null);
+        Button dialogButton = layoutView.findViewById(R.id.buttonOk4);
+        Button dialogButton2 = layoutView.findViewById(R.id.buttonNever4);
+        dialogBuilder.setView(layoutView);
+
+        TextView alertT = findViewById(R.id.alertText4);
+//        alertT.setText("value 2 below 15 or above 35 during the process");
+
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        dialogButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SharedPreferences preferences4 = getSharedPreferences("PREFS4", 0);
+                SharedPreferences.Editor editor = preferences4.edit();
+                editor.putBoolean("showCustomDialog4", false);
+                editor.apply();
+
+                alertDialog.dismiss();
+            }
+        });
+    }
+
+    private void showCustomDialog5() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        View layoutView = getLayoutInflater().inflate(R.layout.my_dialog5, null);
+        Button dialogButton = layoutView.findViewById(R.id.buttonOk5);
+        Button dialogButton2 = layoutView.findViewById(R.id.buttonNever5);
+        dialogBuilder.setView(layoutView);
+
+        TextView alertT = findViewById(R.id.alertText5);
+//        alertT.setText("value 2 below 15 or above 35 during the process");
+
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        dialogButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences preferences5 = getSharedPreferences("PREFS5", 0);
+                SharedPreferences.Editor editor = preferences5.edit();
+                editor.putBoolean("showCustomDialog5", false);
+                editor.apply();
+                alertDialog.dismiss();
+            }
+        });
+    }
+
 
     private void timer() {
-
         final Handler handler1 = new Handler();
         handler1.post(new Runnable() {
             @Override

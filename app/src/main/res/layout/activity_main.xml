@@ -17,7 +17,8 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/random"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+      />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +46,6 @@
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
-
 
     <TableLayout
         android:layout_width="match_parent"
