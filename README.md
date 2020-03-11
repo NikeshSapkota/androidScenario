@@ -15,3 +15,10 @@ if the value is less than 15 or greater than 35 then alert window will appear fo
 the user has to option to decide from OK or Never show again
 if the user choose never show again then the alert will not show again else the message appear after 5 sec (incase the condition)
 is satisfied until 2 minute is passed
+
+![snap1](https://user-images.githubusercontent.com/43205001/76467574-01c38080-6412-11ea-8799-33880dca053d.PNG)
+
+![snap2](https://user-images.githubusercontent.com/43205001/76467631-21f33f80-6412-11ea-94a7-411a80e12c17.PNG)
+
+
+
